@@ -1,3 +1,11 @@
+"""
+File: computer.py
+Authors: Taran M, Arieana L 
+Assignment: Project 2: Computer Inventory Using Linked Structure and Inheritance
+
+"""
+
+
 class ComputerSystem:
     def __init__(self, ip, year, os):
         self.ip = ip
@@ -36,3 +44,7 @@ class Windows(ComputerSystem):
 
     def getStorageText(self):
         return "C drive: " + str(self.cGB) + " GB"
+
+
+
+

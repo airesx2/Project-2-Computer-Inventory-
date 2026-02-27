@@ -1,3 +1,7 @@
+"""
+File: inventory.py
+"""
+
 from computer import Linux, Windows
 # from linked import LinkedComputer named your file this.
 
