@@ -1,10 +1,5 @@
-"""
-File: inventory.py
-Description: 
-"""
-
 from computer import Linux, Windows
-# from linked import LinkedComputer named your file this.
+from linked import LinkedComputer
 
 
 def printMenu():
@@ -24,7 +19,6 @@ def readInt(prompt):
 
 
 def readGB(prompt):
-    # accepts: "500", "500GB", "500 GB"
     while True:
         s = input(prompt).strip().lower().replace(" ", "")
         if s.endswith("gb"):
@@ -34,6 +28,79 @@ def readGB(prompt):
             if gb > 0:
                 return gb
         print("No match. Enter a positive number like 500 GB.\n")
+def validIP(ip):
+    parts = ip.strip().split(".")
+    if len(parts) != 4:
+        return False
 
-def main():
-    pass
+    nums = []
+    for p in parts:
+        if p == "" or len(p) > 3:
+            return False
+        if not p.isdigit():
+            return False
+        n = int(p)
+        if n < 0 or n > 255:
+            return False
+        nums.append(n)
+
+    if nums == [0, 0, 0, 0]:
+        return False
+
+    return True
+
+
+def readIP():
+    while True:
+        ip = input("Enter the computer’s IP address: ").strip()
+        if validIP(ip):
+            return ip
+        print("No match. Invalid IP address.\n")
+
+
+def printTable(comps):
+    print("Year purchased  IP address       Storage space           Operating system")
+    print("-" * 74)
+    for c in comps:
+        year = c.getYearPurchased()
+        ip = c.ip
+        space = c.getStorageText()
+        os = c.os
+        print(f"{year:<14} {ip:<15} {space:<22} {os}")
+    print()
+
+def listComputers(inv):
+    if len(inv) == 0:
+        print("No match. There are no computers in the inventory.\n")
+        return
+    printTable(inv.getAll())
+
+def addComputer(inv):
+    print("Finish")
+    #We need to complete
+def removeComputers(inv):
+    print("Finish")
+    #We need to complete
+def start():
+    inv = LinkedComputer()
+
+    while True:
+        printMenu()
+        choice = input("...your choice: ").strip().lower()
+        print()
+
+        if choice == "l":
+            listComputers(inv)
+        elif choice == "a":
+            addComputer(inv) # We need to complete this
+        elif choice == "r":
+            removeComputers(inv) # We need to complete this
+        elif choice == "q":
+            print("Thanks for using my program! :)")
+            break
+        else:
+            print("No match.\n")
+
+
+if __name__ == "__main__":
+    start()
