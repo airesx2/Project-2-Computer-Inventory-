@@ -1,5 +1,7 @@
 """
 File: linked.py
+Description:
+Linked structure called LinkedComputer that keeps track of ComputerSystem objects with add and remove methods
 """
 
 class Node:

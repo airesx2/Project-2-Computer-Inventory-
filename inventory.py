@@ -1,5 +1,6 @@
 """
 File: inventory.py
+Description: 
 """
 
 from computer import Linux, Windows
@@ -33,3 +34,6 @@ def readGB(prompt):
             if gb > 0:
                 return gb
         print("No match. Enter a positive number like 500 GB.\n")
+
+def main():
+    pass
