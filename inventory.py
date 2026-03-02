@@ -1,3 +1,9 @@
+"""
+File: inventory.py
+Description:
+"""
+
+
 from computer import Linux, Windows
 from linked import LinkedComputer
 

@@ -5,6 +5,9 @@ Linked structure called LinkedComputer that keeps track of ComputerSystem object
 """
 
 class Node:
+    """
+    
+    """
     def __init__(self, data):
         """
         Constructor for Node class
