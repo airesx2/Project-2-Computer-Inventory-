@@ -8,6 +8,9 @@ from linked import LinkedComputer
 
 
 def printMenu():
+    #TODO
+    """_summary_
+    """
     print("MENU")
     print("L List all computers in your inventory\n")
     print("A Add a computer")
@@ -16,6 +19,15 @@ def printMenu():
 
 
 def readInt(prompt):
+    #TODO
+    """_summary_
+
+    Args:
+        prompt (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     while True:
         s = input(prompt).strip()
         if s.isdigit():
@@ -24,6 +36,15 @@ def readInt(prompt):
 
 
 def readGB(prompt):
+    #TODO
+    """_summary_
+
+    Args:
+        prompt (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     while True:
         s = input(prompt).strip().lower().replace(" ", "")
         if s.endswith("gb"):
@@ -35,6 +56,15 @@ def readGB(prompt):
         print("No match. Enter a positive number like 500 GB.\n")
 
 def validIP(ip):
+    #TODO
+    """_summary_
+
+    Args:
+        ip (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     parts = ip.strip().split(".")
     if len(parts) != 4:
         return False
@@ -57,6 +87,12 @@ def validIP(ip):
 
 
 def readIP():
+    #TODO
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     while True:
         ip = input("Enter the computer’s IP address: ").strip()
         if validIP(ip):
@@ -65,6 +101,12 @@ def readIP():
 
 
 def printTable(comps):
+    #TODO
+    """_summary_
+
+    Args:
+        comps (_type_): _description_
+    """
     print("Year purchased  IP address       Storage space           Operating system")
     print("-" * 74)
     current = comps.head
@@ -78,6 +120,13 @@ def printTable(comps):
     print()
 
 def listComputers(inv):
+    #TODO
+    """_summary_
+
+    Args:
+        inv (_type_): _description_
+    """
+
     if inv.len() == 0:
         print("No match. There are no computers in the inventory.\n")
         return
@@ -85,6 +134,15 @@ def listComputers(inv):
     print("\n\n")
 
 def addComputer(inv):
+    #TODO
+    """_summary_
+
+    Args:
+        inv (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     ip = readIP()
     year = input("Enter the year purchase: ")
     os = input("Enter the operating system: ")
@@ -104,6 +162,12 @@ def addComputer(inv):
     
     
 def removeComputers(inv):
+    #TODO
+    """_summary_
+
+    Args:
+        inv (_type_): _description_
+    """
     rm = int(input("How many computers do you want to remove: "))
     if rm > inv.len():
         print("You are removing more than you have.")
@@ -120,6 +184,9 @@ def removeComputers(inv):
 
 
 def start():
+    #TODO
+    """_summary_
+    """
     inv = LinkedComputer()
 
     while True:

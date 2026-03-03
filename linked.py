@@ -5,6 +5,9 @@ Linked structure called LinkedComputer that keeps track of ComputerSystem object
 """
 
 class Node:
+    """
+    Node class for linked list implementation
+    """
     def __init__(self, data):
         """
         Constructor for Node class
@@ -15,6 +18,9 @@ class Node:
 
 
 class LinkedComputer:
+    """
+    LinkedComputer class that implements a linked list to store ComputerSystem objects
+    """
     def __init__(self):
         """
         Constructor for LinkedComputer class
@@ -45,17 +51,27 @@ class LinkedComputer:
 
 
     def remove(self):
-        """
-        Method that removes and returns the front object (oldest computer) from linked list
+        #TODO
+        """_summary_
+
+        Returns:
+            _type_: _description_
         """
         if self.head is None:
             return None #list is empty so return None
         
         removed_computer = self.head.data #store data of the head node to return later
         self.head = self.head.next #update head to the next node; delete old head node
+        self.count -= 1 #decrement count of nodes in the list
         return removed_computer #return the removed comp object
     
     def len(self):
+        #TODO
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
         return self.count
     
     
