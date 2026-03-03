@@ -88,7 +88,7 @@ class Linux(ComputerSystem):
         Returns:
             str: file system space 
         """
-        return "Filesystem: " + str(self.fsGB) + "GB"
+        return "Filesystem: " + str(self.fsGB) 
 
 
 class Windows(ComputerSystem):
@@ -119,7 +119,7 @@ class Windows(ComputerSystem):
         Returns:
             string: c drive space property
         """
-        return "C drive: " + str(self.cGB) + " GB"
+        return "C drive: " + str(self.cGB) 
 
 
 

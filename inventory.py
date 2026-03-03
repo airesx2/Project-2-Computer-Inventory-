@@ -82,21 +82,22 @@ def listComputers(inv):
         print("No match. There are no computers in the inventory.\n")
         return
     printTable(inv)
+    print("\n\n")
 
 def addComputer(inv):
     ip = readIP()
     year = input("Enter the year purchase: ")
     os = input("Enter the operating system: ")
-    if "Windows" in os:
+    if "windows" in os.lower():
         space = input("Enter the C drive capacity: ")
         inst = Windows(ip, year, os, space)
         print("\n\n")
-    elif "Linux" in os:
+    elif "linux" in os.lower():
         space = input("Enter the file system capacity: ")
         inst = Linux(ip, year, os, space)
         print("\n\n")
     else:
-        print("No match. Please provide a valid os option.")
+        print("\nNo match. Please provide a valid os option.\n")
         return
     
     return inst
@@ -104,6 +105,10 @@ def addComputer(inv):
     
 def removeComputers(inv):
     rm = int(input("How many computers do you want to remove: "))
+    if rm > inv.len():
+        print("You are removing more than you have.")
+        return
+    
     removedComps = LinkedComputer()
 
     while rm != 0:
