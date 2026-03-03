@@ -132,7 +132,7 @@ def start():
             newComp = addComputer(inv) 
             inv.add(newComp)
         elif choice == "r":
-            removeComputers(inv) # We need to complete this
+            removeComputers(inv) 
         elif choice == "q":
             print("Thanks for using my program! :)")
             break
@@ -142,4 +142,5 @@ def start():
 
 if __name__ == "__main__":
     start()
+
 
