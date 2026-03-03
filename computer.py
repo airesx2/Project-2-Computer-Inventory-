@@ -52,6 +52,9 @@ class ComputerSystem:
             str: storage space 
         """
         return str(self.getSpace()) + "GB"
+    
+    def getIP(self):
+        return self.ip
 
 
 class Linux(ComputerSystem):

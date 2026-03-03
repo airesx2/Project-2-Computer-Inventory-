@@ -5,15 +5,13 @@ Linked structure called LinkedComputer that keeps track of ComputerSystem object
 """
 
 class Node:
-    """
-    
-    """
     def __init__(self, data):
         """
         Constructor for Node class
         """
         self.data = data
         self.next = None
+    
 
 
 class LinkedComputer:
@@ -22,21 +20,23 @@ class LinkedComputer:
         Constructor for LinkedComputer class
         """
         self.head = None
+        self.count = 0
     
     def add(self, compObject):
         """
         Method that adds a ComputerSystem object to linked list based on year of purchase, oldest to newest 
 
         """
+        self.count += 1
         new_node = Node(compObject)
         #if linked list is empty or the new computer is older than the head, insert at the beginning
-        if self.head is None or compObject.getYearPurchased() < self.head.data.getYearPurchased():
+        if self.head is None or compObject.yearPurchased < self.head.data.yearPurchased:
             new_node.next = self.head #point the new node's next to the current head
             self.head = new_node #update head to the new node
         else:
             current = self.head
             #keep traverse as long as next node exists and new comp is newer than the next node's comp
-            while current.next is not None and compObject.getYearPurchased() >= current.next.data.getYearPurchased():
+            while current.next is not None and compObject.yearPurchased >= current.next.data.yearPurchased:
                 current = current.next
             
             #we have reached end of the list or found a node with a newer comp
@@ -54,4 +54,9 @@ class LinkedComputer:
         removed_computer = self.head.data #store data of the head node to return later
         self.head = self.head.next #update head to the next node; delete old head node
         return removed_computer #return the removed comp object
+    
+    def len(self):
+        return self.count
+    
+    
 

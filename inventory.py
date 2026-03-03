@@ -1,18 +1,17 @@
 """
 File: inventory.py
-Description:
+Description: 
+Consists of the main program, processing user input and instatiates appropriate objs which are added to the linked structure
 """
-
-
 from computer import Linux, Windows
 from linked import LinkedComputer
 
 
 def printMenu():
     print("MENU")
-    print("L List all computers in your inventory")
+    print("L List all computers in your inventory\n")
     print("A Add a computer")
-    print("R Remove some computers")
+    print("R Remove some computers\n")
     print("Q Quit")
 
 
@@ -34,6 +33,7 @@ def readGB(prompt):
             if gb > 0:
                 return gb
         print("No match. Enter a positive number like 500 GB.\n")
+
 def validIP(ip):
     parts = ip.strip().split(".")
     if len(parts) != 4:
@@ -67,26 +67,53 @@ def readIP():
 def printTable(comps):
     print("Year purchased  IP address       Storage space           Operating system")
     print("-" * 74)
-    for c in comps:
-        year = c.getYearPurchased()
-        ip = c.ip
-        space = c.getStorageText()
-        os = c.os
-        print(f"{year:<14} {ip:<15} {space:<22} {os}")
+    current = comps.head
+    while current:
+        year = current.data.yearPurchased
+        ip = current.data.ip
+        space = current.data.getStorageText()
+        os = current.data.os
+        print(f"{year:<15} {ip:<15} {space:<24} {os}")
+        current = current.next
     print()
 
 def listComputers(inv):
-    if len(inv) == 0:
+    if inv.len() == 0:
         print("No match. There are no computers in the inventory.\n")
         return
-    printTable(inv.getAll())
+    printTable(inv)
 
 def addComputer(inv):
-    print("Finish")
-    #We need to complete
+    ip = readIP()
+    year = input("Enter the year purchase: ")
+    os = input("Enter the operating system: ")
+    if "Windows" in os:
+        space = input("Enter the C drive capacity: ")
+        inst = Windows(ip, year, os, space)
+        print("\n\n")
+    elif "Linux" in os:
+        space = input("Enter the file system capacity: ")
+        inst = Linux(ip, year, os, space)
+        print("\n\n")
+    else:
+        print("No match. Please provide a valid os option.")
+        return
+    
+    return inst
+    
+    
 def removeComputers(inv):
-    print("Finish")
-    #We need to complete
+    rm = int(input("How many computers do you want to remove: "))
+    removedComps = LinkedComputer()
+
+    while rm != 0:
+        c = inv.remove()
+        removedComps.add(c)
+        rm -= 1
+    print("\nYou have removed the following computer: \n")
+    printTable(removedComps)
+
+
 def start():
     inv = LinkedComputer()
 
@@ -94,11 +121,11 @@ def start():
         printMenu()
         choice = input("...your choice: ").strip().lower()
         print()
-
         if choice == "l":
             listComputers(inv)
         elif choice == "a":
-            addComputer(inv) # We need to complete this
+            newComp = addComputer(inv) 
+            inv.add(newComp)
         elif choice == "r":
             removeComputers(inv) # We need to complete this
         elif choice == "q":
@@ -110,3 +137,4 @@ def start():
 
 if __name__ == "__main__":
     start()
+
