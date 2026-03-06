@@ -11,6 +11,8 @@ class Node:
     def __init__(self, data):
         """
         Constructor for Node class
+        Args:
+            data (ComputerSystem): the computer object stored in this node
         """
         self.data = data
         self.next = None
@@ -31,6 +33,8 @@ class LinkedComputer:
     def add(self, compObject):
         """
         Method that adds a ComputerSystem object to linked list based on year of purchase, oldest to newest 
+        Args:
+            compObject (ComputerSystem): the computer object to be added to the linked list
 
         """
         self.count += 1
@@ -51,14 +55,14 @@ class LinkedComputer:
 
 
     def remove(self):
-        #TODO
-        """_summary_
+        """Method that removes the oldest computer from the linked list and returns it
 
         Returns:
-            _type_: _description_
+            ComputerSystem: the removed computer object (or None list is empty)
         """
+        #if the linked list is empty, return None
         if self.head is None:
-            return None #list is empty so return None
+            return None 
         
         removed_computer = self.head.data #store data of the head node to return later
         self.head = self.head.next #update head to the next node; delete old head node
@@ -66,11 +70,10 @@ class LinkedComputer:
         return removed_computer #return the removed comp object
     
     def len(self):
-        #TODO
-        """_summary_
+        """Returns the number of nodes in the linked list
 
         Returns:
-            _type_: _description_
+            int: number of nodes in the linked list
         """
         return self.count
     

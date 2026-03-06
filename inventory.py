@@ -34,6 +34,7 @@ def readInt(prompt):
     """
     while True:
         s = input(prompt).strip()
+        #input is valid if it's a whole number (no decimals, no negative sign)
         if s.isdigit():
             return int(s)
         print("No match. Please enter a whole number.\n")
@@ -52,12 +53,16 @@ def readGB(prompt):
     Returns:
         int: A positive integer representing storage size in gigabytes.
     """
+    #input is valid if it is a positive number with optional "GB" suffix (ignore spaces and case)
     while True:
         s = input(prompt).strip().lower().replace(" ", "")
+        #check if the input ends with "gb", remove before validating the number
         if s.endswith("gb"):
             s = s[:-2]
+        #check if the remaining string is a positive whole number
         if s.isdigit():
             gb = int(s)
+            #check if the number is greater than 0
             if gb > 0:
                 return gb
         print("No match. Enter a positive number like 500 GB.\n")
@@ -80,20 +85,26 @@ def validIP(ip):
         bool: True if the IP address is valid, otherwise False.
     """
     parts = ip.strip().split(".")
+    #check if there are exactly 4 parts separated by periods
     if len(parts) != 4:
         return False
 
     nums = []
+    #validate each part of the IP address according to the rules outlined above
     for p in parts:
+        #check if part is empty, has more than 3 characters
         if p == "" or len(p) > 3:
             return False
+        #check if part is not numeric
         if not p.isdigit():
             return False
         n = int(p)
+        #check if part is outside the valid range of 0-255
         if n < 0 or n > 255:
             return False
         nums.append(n)
 
+    #check if all parts are zero 
     if nums == [0, 0, 0, 0]:
         return False
 
@@ -109,8 +120,10 @@ def readIP():
     Returns:
         str: A valid IPv4 address entered by the user.
     """
+    #input is valid if it has 4 numeric parts separated by periods, each part between 0-255, and not all zeros
     while True:
         ip = input("Enter the computer’s IP address: ").strip()
+        #check if the input is a valid IP address (validIP function)
         if validIP(ip):
             return ip
         print("No match. Invalid IP address.\n")
@@ -126,6 +139,7 @@ def printTable(comps):
     print("Year purchased  IP address       Storage space           Operating system")
     print("-" * 74)
     current = comps.head
+    #traverse the linked list and print each computer's details
     while current:
         year = current.data.yearPurchased
         ip = current.data.ip
@@ -145,6 +159,7 @@ def listComputers(inv):
     Args:
         inv (LinkedComputer): The inventory containing computer objects.
     """
+    #check if the inventory is empty 
     if inv.len() == 0:
         print("No match. There are no computers in the inventory.\n")
         return
@@ -169,10 +184,12 @@ def addComputer(inv):
     ip = readIP()
     year = input("Enter the year purchase: ")
     os = input("Enter the operating system: ")
+    #check if inputted os is windows
     if "windows" in os.lower():
         space = input("Enter the C drive capacity: ")
         inst = Windows(ip, year, os, space)
         print("\n\n")
+    #check if inputted os is linux
     elif "linux" in os.lower():
         space = input("Enter the file system capacity: ")
         inst = Linux(ip, year, os, space)
@@ -195,12 +212,14 @@ def removeComputers(inv):
         inv (LinkedComputer): The inventory from which computers will be removed.
     """
     rm = int(input("How many computers do you want to remove: "))
+    #check if the user is trying to remove more computers than are in the inventory
     if rm > inv.len():
         print("You are removing more than you have.")
         return
     
     removedComps = LinkedComputer()
 
+    #remove the specified no. of computers from inventory and add them to removedComps linked list
     while rm != 0:
         c = inv.remove()
         removedComps.add(c)
@@ -217,23 +236,28 @@ def start():
     """
     inv = LinkedComputer()
 
+    #prints user menu and processes user input until they choose to quit
     while True:
         printMenu()
         choice = input("...your choice: ").strip().lower()
         print()
+        #list computers
         if choice == "l":
             listComputers(inv)
+        #add computers
         elif choice == "a":
             newComp = addComputer(inv) 
             inv.add(newComp)
+        #remove computers
         elif choice == "r":
             removeComputers(inv) 
+        #quit program
         elif choice == "q":
             print("Thanks for using my program! :)")
             break
         else:
             print("No match.\n")
 
-
+#start the program
 if __name__ == "__main__":
     start()

@@ -54,6 +54,9 @@ class ComputerSystem:
         return str(self.getSpace()) + "GB"
     
     def getIP(self):
+        """
+        Returns the IP address of the computer system
+        """
         return self.ip
 
 
