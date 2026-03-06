@@ -1,15 +1,19 @@
 """
 File: inventory.py
-Description: 
-Consists of the main program, processing user input and instatiates appropriate objs which are added to the linked structure
+
+Description:
+    Contains the main program logic for managing a computer inventory.
+    It processes user input, creates the appropriate computer objects,
+    and stores them in a linked structure.
 """
+
 from computer import Linux, Windows
 from linked import LinkedComputer
 
 
 def printMenu():
-    #TODO
-    """_summary_
+    """
+    Display the main menu options for the inventory program.
     """
     print("MENU")
     print("L List all computers in your inventory\n")
@@ -19,14 +23,14 @@ def printMenu():
 
 
 def readInt(prompt):
-    #TODO
-    """_summary_
+    """
+    Prompt the user to enter a whole number and keep asking until valid input is given.
 
     Args:
-        prompt (_type_): _description_
+        prompt (str): The message displayed to the user.
 
     Returns:
-        _type_: _description_
+        int: A valid whole number entered by the user.
     """
     while True:
         s = input(prompt).strip()
@@ -36,14 +40,17 @@ def readInt(prompt):
 
 
 def readGB(prompt):
-    #TODO
-    """_summary_
+    """
+    Prompt the user to enter a positive storage size in gigabytes.
+
+    The user may enter a value such as '500' or '500 GB'. The function
+    removes spaces and ignores letter case before validating the input.
 
     Args:
-        prompt (_type_): _description_
+        prompt (str): The message displayed to the user.
 
     Returns:
-        _type_: _description_
+        int: A positive integer representing storage size in gigabytes.
     """
     while True:
         s = input(prompt).strip().lower().replace(" ", "")
@@ -55,15 +62,22 @@ def readGB(prompt):
                 return gb
         print("No match. Enter a positive number like 500 GB.\n")
 
+
 def validIP(ip):
-    #TODO
-    """_summary_
+    """
+    Check whether a string is a valid IPv4 address.
+
+    A valid IP address must:
+    - Contain exactly four parts separated by periods
+    - Have only numeric parts
+    - Have each part between 0 and 255
+    - Not be 0.0.0.0
 
     Args:
-        ip (_type_): _description_
+        ip (str): The IP address string to validate.
 
     Returns:
-        _type_: _description_
+        bool: True if the IP address is valid, otherwise False.
     """
     parts = ip.strip().split(".")
     if len(parts) != 4:
@@ -87,11 +101,13 @@ def validIP(ip):
 
 
 def readIP():
-    #TODO
-    """_summary_
+    """
+    Prompt the user to enter a valid IPv4 address.
+
+    Keeps asking until the user provides an IP address that passes validation.
 
     Returns:
-        _type_: _description_
+        str: A valid IPv4 address entered by the user.
     """
     while True:
         ip = input("Enter the computer’s IP address: ").strip()
@@ -101,11 +117,11 @@ def readIP():
 
 
 def printTable(comps):
-    #TODO
-    """_summary_
+    """
+    Print all computers in a formatted table.
 
     Args:
-        comps (_type_): _description_
+        comps (LinkedComputer): A linked structure containing computer objects to display.
     """
     print("Year purchased  IP address       Storage space           Operating system")
     print("-" * 74)
@@ -119,29 +135,36 @@ def printTable(comps):
         current = current.next
     print()
 
+
 def listComputers(inv):
-    #TODO
-    """_summary_
+    """
+    Display all computers currently in the inventory.
+
+    If the inventory is empty, an appropriate message is shown.
 
     Args:
-        inv (_type_): _description_
+        inv (LinkedComputer): The inventory containing computer objects.
     """
-
     if inv.len() == 0:
         print("No match. There are no computers in the inventory.\n")
         return
     printTable(inv)
     print("\n\n")
 
+
 def addComputer(inv):
-    #TODO
-    """_summary_
+    """
+    Prompt the user for computer details and create a new computer object.
+
+    If the operating system contains 'windows', a Windows object is created.
+    If the operating system contains 'linux', a Linux object is created.
+    If the operating system is invalid, no object is created.
 
     Args:
-        inv (_type_): _description_
+        inv (LinkedComputer): The inventory where the computer may later be added.
 
     Returns:
-        _type_: _description_
+        Windows | Linux | None: The created computer object, or None if the OS is invalid.
     """
     ip = readIP()
     year = input("Enter the year purchase: ")
@@ -162,11 +185,14 @@ def addComputer(inv):
     
     
 def removeComputers(inv):
-    #TODO
-    """_summary_
+    """
+    Remove a specified number of computers from the inventory.
+
+    Removed computers are stored temporarily in a separate linked structure
+    and then displayed to the user.
 
     Args:
-        inv (_type_): _description_
+        inv (LinkedComputer): The inventory from which computers will be removed.
     """
     rm = int(input("How many computers do you want to remove: "))
     if rm > inv.len():
@@ -184,8 +210,10 @@ def removeComputers(inv):
 
 
 def start():
-    #TODO
-    """_summary_
+    """
+    Start the inventory program and process user menu selections.
+
+    Creates an empty inventory and continues running until the user chooses to quit.
     """
     inv = LinkedComputer()
 
@@ -209,5 +237,3 @@ def start():
 
 if __name__ == "__main__":
     start()
-
-
