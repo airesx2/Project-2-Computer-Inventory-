@@ -143,7 +143,7 @@ def printTable(comps):
     while current:
         year = current.data.yearPurchased
         ip = current.data.ip
-        space = current.data.getStorageText()
+        space = current.data.getStorageText() + " GB"
         os = current.data.os
         print(f"{year:<15} {ip:<15} {space:<24} {os}")
         current = current.next
@@ -182,16 +182,16 @@ def addComputer(inv):
         Windows | Linux | None: The created computer object, or None if the OS is invalid.
     """
     ip = readIP()
-    year = input("Enter the year purchase: ")
+    year = readInt("Enter the year purchased: ")
     os = input("Enter the operating system: ")
     #check if inputted os is windows
     if "windows" in os.lower():
-        space = input("Enter the C drive capacity: ")
+        space = readGB("Enter the C drive capacity: ")
         inst = Windows(ip, year, os, space)
         print("\n\n")
     #check if inputted os is linux
     elif "linux" in os.lower():
-        space = input("Enter the file system capacity: ")
+        space = readGB("Enter the file system capacity: ")
         inst = Linux(ip, year, os, space)
         print("\n\n")
     else:
@@ -211,7 +211,7 @@ def removeComputers(inv):
     Args:
         inv (LinkedComputer): The inventory from which computers will be removed.
     """
-    rm = int(input("How many computers do you want to remove: "))
+    rm = readInt("How many computers do you want to remove: ")
     #check if the user is trying to remove more computers than are in the inventory
     if rm > inv.len():
         print("You are removing more than you have.")
@@ -247,7 +247,9 @@ def start():
         #add computers
         elif choice == "a":
             newComp = addComputer(inv) 
-            inv.add(newComp)
+            #avoid None objects being added to the inventory 
+            if newComp is not None:
+                inv.add(newComp)
         #remove computers
         elif choice == "r":
             removeComputers(inv) 

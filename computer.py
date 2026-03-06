@@ -56,6 +56,8 @@ class ComputerSystem:
     def getIP(self):
         """
         Returns the IP address of the computer system
+        Returns:
+            str: IP address of the computer system
         """
         return self.ip
 
