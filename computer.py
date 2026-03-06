@@ -7,8 +7,8 @@ Description:
 Creation of classes ComputerSystem, Linux, Windows with appropriate inheritance and methods for each. 
 """
 
-
-class ComputerSystem:
+from abc import ABC, abstractmethod
+class ComputerSystem(ABC):
     """
     ComputerSystem class, parent class for Linux Windows subclasses
     """
@@ -34,32 +34,12 @@ class ComputerSystem:
         """
         return self._yearPurchased
     
-
+    @abstractmethod
     def getSpace(self):
         """
-        Required implemention by subclasses
-
-        Raises:
-            NotImplementedError: if the subclass does not override this method
+        Abstract method must be overidden by subclasses to return storage space
         """
-        raise NotImplementedError("getSpace() must be overridden")
-
-    def getStorageText(self):
-        """
-        Returns the amount of storage space available on system
-
-        Returns:
-            str: storage space 
-        """
-        return str(self.getSpace()) + "GB"
-    
-    def getIP(self):
-        """
-        Returns the IP address of the computer system
-        Returns:
-            str: IP address of the computer system
-        """
-        return self.ip
+        pass
 
 
 class Linux(ComputerSystem):

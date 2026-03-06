@@ -1,5 +1,8 @@
 """
 File: linked.py
+Authors: Taran M, Arieana L 
+Assignment: Project 2: Computer Inventory Using Linked Structure and Inheritance
+Created: 02/26/2026
 Description:
 Linked structure called LinkedComputer that keeps track of ComputerSystem objects with add and remove methods
 """
